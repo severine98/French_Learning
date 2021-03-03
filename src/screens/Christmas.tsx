@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import firebase from 'react-native-firebase';
 import {ScrollView} from 'react-native-gesture-handler';
 import {NavBar, VocabCard} from '../../components';
@@ -38,6 +38,13 @@ export const Christmas = ({navigation}) => {
             />
           );
         })}
+        <TouchableOpacity
+          style={{backgroundColor: colors.white}}
+          onPress={handleTest}>
+          <Text style={{textAlign: 'center', padding: spacing.base}}>
+            Take the test
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
