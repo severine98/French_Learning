@@ -1,15 +1,24 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import firebase from 'react-native-firebase';
 import {ScrollView} from 'react-native-gesture-handler';
 import {MenuTitle, NavBar} from '../../components';
-import {colors, spacing, typography} from '../styles';
-// import firestore from '@react-native-firebase/firestore';
-
-// const vocabCollection = firestore()
-//   .collection('Vocab')
-//   .doc('N4KRiij6e6Wyjotd2AO5');
+import {colors, spacing} from '../styles';
 
 export const Vocab = ({navigation}) => {
+  const [value, setValue] = useState();
+
+  console.log('value', typeof value, value);
+
+  const rootRef = firebase
+    .database()
+    .ref('age')
+    .once('value')
+    .then((snapshot) => {
+      console.log('User data: ', snapshot.val());
+      setValue(snapshot.val());
+    });
+
   const handleXmas = () => {
     navigation.navigate('Christmas');
   };
@@ -21,6 +30,8 @@ export const Vocab = ({navigation}) => {
         <Text style={styles.title}>Vocab screen</Text>
       </View>
       <View>
+        <Text>BELLO</Text>
+        <Text>{value}</Text>
         <MenuTitle title={'Christmas'} onPress={handleXmas} />
         <MenuTitle title={'Holidays'} onPress={handleXmas} />
         <MenuTitle title={'Cooking'} onPress={handleXmas} />
