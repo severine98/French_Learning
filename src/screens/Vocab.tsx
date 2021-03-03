@@ -1,13 +1,9 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {MenuTitle, NavBar} from '../../components';
-import {colors, spacing, typography} from '../styles';
+import {colors, spacing} from '../styles';
 // import firestore from '@react-native-firebase/firestore';
-
-// const vocabCollection = firestore()
-//   .collection('Vocab')
-//   .doc('N4KRiij6e6Wyjotd2AO5');
 
 export const Vocab = ({navigation}) => {
   const handleXmas = () => {
