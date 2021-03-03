@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {Heart} from '../assets/icons';
 import {spacing, colors} from '../src/styles';
 
 const VocabCard = ({
@@ -9,16 +10,11 @@ const VocabCard = ({
   sentenceEnglish,
 }: any) => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        paddingVertical: spacing.baseSmall,
-        borderWidth: 1,
-        borderColor: colors.black,
-      }}>
-      <Text style={{padding: spacing.small, paddingRight: spacing.base}}>
+    <View style={styles.container}>
+      <Heart />
+      {/* <Text style={{padding: spacing.small, paddingRight: spacing.base}}>
         {'<3'}
-      </Text>
+      </Text> */}
       <View>
         <Text>
           {wordFrench} <Text>{wordEnglish}</Text>{' '}
@@ -29,5 +25,15 @@ const VocabCard = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    paddingVertical: spacing.baseSmall,
+    borderWidth: 1,
+    borderColor: colors.blue,
+    backgroundColor: colors.white,
+  },
+});
 
 export {VocabCard};

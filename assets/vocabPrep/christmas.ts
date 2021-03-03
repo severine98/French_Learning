@@ -12,36 +12,6 @@ const vocab: FrenchVocab[] = [
     sentenceFrench: "C'est le jour de Noel",
     sentenceEnglish: "It's Christmas day",
   },
-  {
-    wordFrench: 'Le Cadeau',
-    wordEnglish: 'Present',
-    sentenceFrench: "J'ai recu un cadeau",
-    sentenceEnglish: 'I received a present',
-  },
-  {
-    wordFrench: 'La Dinde',
-    wordEnglish: 'Turkey',
-    sentenceFrench: 'Vas-tu manger de la dinde le 25?',
-    sentenceEnglish: 'Are you going to have some turkey on the 25th?',
-  },
-  {
-    wordFrench: 'Le Sapin de Noel',
-    wordEnglish: 'Christmas tree',
-    sentenceFrench: 'Nous devons acheter un sapin de noel ',
-    sentenceEnglish: 'We need to buy a chritsmas tree',
-  },
-  {
-    wordFrench: 'La Messe',
-    wordEnglish: 'Mass',
-    sentenceFrench: 'Nous allons a la messe pour Noel',
-    sentenceEnglish: 'We are going to mass for christmas',
-  },
-  {
-    wordFrench: 'Le pere Noel',
-    wordEnglish: 'Father christmas',
-    sentenceFrench: 'Le pere noel passe par la cheminee',
-    sentenceEnglish: 'Father chritmas comes though the chimnee',
-  },
 ];
 
 const christmas = {
