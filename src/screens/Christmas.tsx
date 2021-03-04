@@ -8,11 +8,7 @@ import {colors, spacing} from '../styles';
 
 export const Christmas = ({navigation}) => {
   const [frenchWord, setFrenchWord] = useState();
-
-  const handleTest = () => {
-    console.log('HANDLE TEST');
-    // navigation.navigate('VocabTest', {word: christmas});
-  };
+  const [test, setTest] = useState();
 
   useEffect(() => {
     firebase
@@ -23,6 +19,20 @@ export const Christmas = ({navigation}) => {
         setFrenchWord(snapshot.val().christmas);
       });
   }, []);
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref('test')
+      .once('value')
+      .then((snapshot) => {
+        setTest(snapshot.val().christmas);
+      });
+  }, []);
+
+  const handleTest = () => {
+    navigation.navigate('VocabTest', {content: test});
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
