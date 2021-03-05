@@ -1,18 +1,28 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {MenuTitle, NavBar} from '../../components';
+import {MenuTitle, NavBar, TestCard} from '../../components';
 import {colors, spacing} from '../styles';
 
-export const VocabTest = ({navigation, route}) => {
-  const word = route.params;
+const json = {
+  Père_Noël: 'As-tu déjà rencontré le Père Noël?',
+  cadeau: 'Les cadeaux sont sous le sapin!',
+  dinde: 'La dinde prend du temps à cuire',
+};
 
-  console.log(word.cadeau);
+export const VocabTest = ({navigation, route}) => {
+  const content = route?.params;
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <NavBar />
-      <View style={styles.container}>{/* <Text></Text> */}</View>
+      {Object.entries(json).map((word) => {
+        return (
+          <>
+            <TestCard word={word[0].replace('_', ' ')} sentence={word[1]} />
+          </>
+        );
+      })}
     </SafeAreaView>
   );
 };

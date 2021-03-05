@@ -1,6 +1,8 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {spacing, colors} from '../src/styles';
+import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Heart} from '../assets/icons';
+import {colors, spacing} from '../src/styles';
 
 const VocabCard = ({
   wordFrench,
@@ -9,25 +11,57 @@ const VocabCard = ({
   sentenceEnglish,
 }: any) => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        paddingVertical: spacing.baseSmall,
-        borderWidth: 1,
-        borderColor: colors.black,
-      }}>
-      <Text style={{padding: spacing.small, paddingRight: spacing.base}}>
-        {'<3'}
-      </Text>
-      <View>
-        <Text>
-          {wordFrench} <Text>{wordEnglish}</Text>{' '}
-        </Text>
-        <Text>{sentenceFrench}</Text>
-        <Text>{sentenceEnglish}</Text>
+    <SafeAreaView style={styles.container}>
+      <Heart />
+      <View style={{flex: 1}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingRight: spacing.baseSmall,
+          }}>
+          <Text style={styles.wordFrench}>{wordFrench}</Text>
+          <Text style={styles.wordEnglish}>{wordEnglish}</Text>
+        </View>
+
+        <Text style={styles.sentenceFrench}>{sentenceFrench}</Text>
+        <Text style={styles.sentenceEnglish}>{sentenceEnglish}</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: colors.blue,
+    backgroundColor: colors.white,
+  },
+  wordEnglish: {
+    fontWeight: 'bold',
+    color: colors.black,
+    fontStyle: 'italic',
+    fontSize: 15,
+  },
+  wordFrench: {
+    fontWeight: 'bold',
+    color: colors.red,
+    fontSize: 20,
+  },
+  sentenceEnglish: {
+    color: colors.black,
+    fontSize: 15,
+    fontStyle: 'italic',
+    marginBottom: spacing.small,
+  },
+  sentenceFrench: {
+    color: colors.red,
+    fontSize: 15,
+    paddingVertical: spacing.small,
+  },
+});
 
 export {VocabCard};
