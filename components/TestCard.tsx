@@ -1,5 +1,7 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, View} from 'react-native';
+import firebase from 'react-native-firebase';
+import RNPickerSelect, {Item} from 'react-native-picker-select';
 import {colors, spacing} from '../src/styles';
 
 type TestCardProp = {
@@ -7,17 +9,36 @@ type TestCardProp = {
   sentence: any;
 };
 
-const Componenent = () => {
-  return <Text>HELLO</Text>;
-};
-
 const TestCard = ({word, sentence}: TestCardProp) => {
   const indexOfWordInSentence = sentence.indexOf(word);
   const wordLength = word.length;
   const stringArray = sentence.split('');
+  const [vocabList, setVocabList] = useState(null);
 
   const firstHalf = stringArray.splice(0, indexOfWordInSentence);
   const secondHalf = stringArray.splice(wordLength);
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref('vocab')
+      .once('value')
+      .then((snapshot) => {
+        setVocabList(snapshot.val().christmas);
+      });
+  }, []);
+
+  const itemsArray: Item[] = [];
+
+  useEffect(() => {
+    Object.entries(vocabList ?? {}).map((word) => {
+      console.log('word', typeof word[0], word[0]);
+      const singleWord = word[0];
+      itemsArray.push({label: singleWord, value: singleWord});
+      console.log('ITEMS ARR', itemsArray);
+      return itemsArray;
+    });
+  }, [itemsArray, vocabList]);
 
   return (
     <View
@@ -33,10 +54,13 @@ const TestCard = ({word, sentence}: TestCardProp) => {
       </Text>
       <View style={{flexDirection: 'row'}}>
         <Text>{firstHalf}</Text>
-
+        <RNPickerSelect
+          onValueChange={(value) => console.log(value)}
+          placeholder={{label: 'Select Answer', value: null}}
+          items={itemsArray}
+        />
         <Text>{secondHalf}</Text>
       </View>
-
       <Text
         style={{
           color: colors.red,
@@ -46,37 +70,5 @@ const TestCard = ({word, sentence}: TestCardProp) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: colors.blue,
-    backgroundColor: colors.white,
-  },
-  wordEnglish: {
-    fontWeight: 'bold',
-    color: colors.black,
-    fontStyle: 'italic',
-    fontSize: 15,
-  },
-  wordFrench: {
-    fontWeight: 'bold',
-    color: colors.red,
-    fontSize: 20,
-  },
-  sentenceEnglish: {
-    color: colors.black,
-    fontSize: 15,
-    fontStyle: 'italic',
-    marginBottom: spacing.small,
-  },
-  sentenceFrench: {
-    color: colors.red,
-    fontSize: 15,
-    paddingVertical: spacing.small,
-  },
-});
 
 export {TestCard};
