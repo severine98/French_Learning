@@ -7,14 +7,14 @@ import {colors, spacing} from '../src/styles';
 type TestCardProp = {
   word: string;
   sentence: any;
+  handleChange: any;
 };
 
-const TestCard = ({word, sentence}: TestCardProp) => {
+const TestCard = ({word, sentence, handleChange}: TestCardProp) => {
   const indexOfWordInSentence = sentence.indexOf(word);
   const wordLength = word.length;
   const stringArray = sentence.split('');
   const [vocabList, setVocabList] = useState(null);
-
   const firstHalf = stringArray.splice(0, indexOfWordInSentence);
   const secondHalf = stringArray.splice(wordLength);
 
@@ -32,10 +32,8 @@ const TestCard = ({word, sentence}: TestCardProp) => {
 
   useEffect(() => {
     Object.entries(vocabList ?? {}).map((word) => {
-      console.log('word', typeof word[0], word[0]);
       const singleWord = word[0];
       itemsArray.push({label: singleWord, value: singleWord});
-      console.log('ITEMS ARR', itemsArray);
       return itemsArray;
     });
   }, [itemsArray, vocabList]);
@@ -55,7 +53,7 @@ const TestCard = ({word, sentence}: TestCardProp) => {
       <View style={{flexDirection: 'row'}}>
         <Text>{firstHalf}</Text>
         <RNPickerSelect
-          onValueChange={(value) => console.log(value)}
+          onValueChange={(value) => handleChange(value, word)}
           placeholder={{label: 'Select Answer', value: null}}
           items={itemsArray}
         />
