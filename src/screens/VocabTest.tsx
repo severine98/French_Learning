@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {NavBar, TestCard} from '../../components';
 
 export const VocabTest = ({navigation, route}) => {
   const content = route?.params;
-  // IF NOT ALL FIELDS ARE ANSWERS, DISABLE CTA
   const [disabled, setDisabled] = useState(false);
-
   const totalArray: any = [];
 
   const handleChange = (value: string, word: string) => {
@@ -38,41 +37,31 @@ export const VocabTest = ({navigation, route}) => {
     navigation.navigate('TestResult', {score: totalScore});
   };
 
-  const myArr = [{dinde: 0}, {Père_Noël: 0}, {cadeau: 0}];
-  const hi = 'dinde';
-
-  myArr.forEach((item) => {
-    Object.keys(item).forEach((key) => {
-      if (key === hi) {
-        item[key] = 10;
-      }
-    });
-  });
-
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <NavBar />
-      <View style={{flex: 1}}>
-        {Object.entries(content.content).map((word) => {
-          // totalArray.push({name: word[0], score: null});
-          totalArray.push({[word[0]]: null});
-          return (
-            <>
-              <TestCard
-                word={word[0].replace('_', ' ')}
-                sentence={word[1]}
-                handleChange={handleChange}
-              />
-            </>
-          );
-        })}
-      </View>
-      <Button
-        title={'Submit answers'}
-        onPress={handleSubmit}
-        disabled={disabled}
-      />
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={{flex: 1}}>
+        <NavBar />
+        <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+          {Object.entries(content.content).map((word) => {
+            totalArray.push({[word[0].replace('_', ' ')]: null});
+            return (
+              <>
+                <TestCard
+                  word={word[0].replace('_', ' ')}
+                  sentence={word[1]}
+                  handleChange={handleChange}
+                />
+              </>
+            );
+          })}
+          <Button
+            title={'Submit answers'}
+            onPress={handleSubmit}
+            disabled={disabled}
+          />
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 

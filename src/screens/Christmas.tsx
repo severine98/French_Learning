@@ -36,8 +36,8 @@ export const Christmas = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <NavBar />
       <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-        <NavBar />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Christmas vocab</Text>
           {Object.entries(frenchWord ?? {}).map((word) => {
@@ -45,8 +45,8 @@ export const Christmas = ({navigation}) => {
               <VocabCard
                 sentenceEnglish={word[1].sentenceEnglish}
                 sentenceFrench={word[1].sentenceFrench}
-                wordFrench={word[1].wordFrench}
-                wordEnglish={word[1].wordEnglish}
+                wordFrench={word[1].wordFrench.replace('_', ' ')}
+                wordEnglish={word[1].wordEnglish.replace('_', ' ')}
               />
             );
           })}

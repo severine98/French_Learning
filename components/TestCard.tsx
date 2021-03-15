@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import firebase from 'react-native-firebase';
 import RNPickerSelect, {Item} from 'react-native-picker-select';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {colors, spacing} from '../src/styles';
 
 type TestCardProp = {
@@ -21,51 +22,75 @@ const TestCard = ({word, sentence, handleChange}: TestCardProp) => {
   useEffect(() => {
     firebase
       .database()
-      .ref('vocab')
+      .ref('test')
       .once('value')
       .then((snapshot) => {
         setVocabList(snapshot.val().christmas);
       });
   }, []);
 
+  const shuffleArray = (array) => {
+    // The de-facto unbiased shuffle algorithm is the Fisher-Yates (aka Knuth) Shuffle.
+    let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
+
   const itemsArray: Item[] = [];
+  const shuffledArray = shuffleArray(itemsArray);
 
   useEffect(() => {
     Object.entries(vocabList ?? {}).map((word) => {
-      const singleWord = word[0];
+      const singleWord = word[0].replace('_', ' ');
       itemsArray.push({label: singleWord, value: singleWord});
       return itemsArray;
     });
-  }, [itemsArray, vocabList]);
+    shuffleArray(itemsArray);
+  }, [itemsArray, vocabList, shuffledArray]);
 
   return (
-    <View
+    <SafeAreaView
       style={{
+        flex: 1,
         marginVertical: spacing.base,
-        paddingLeft: spacing.base,
+        paddingHorizontal: spacing.base,
       }}>
-      <Text
-        style={{
-          color: colors.blue,
-        }}>
-        {word.toUpperCase()}
-      </Text>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         <Text>{firstHalf}</Text>
-        <RNPickerSelect
-          onValueChange={(value) => handleChange(value, word)}
-          placeholder={{label: 'Select Answer', value: null}}
-          items={itemsArray}
-        />
+        <View>
+          <RNPickerSelect
+            onValueChange={(value) => {
+              handleChange(value, word);
+            }}
+            placeholder={{label: 'Select Answer', value: null}}
+            items={shuffledArray}
+          />
+        </View>
         <Text>{secondHalf}</Text>
       </View>
-      <Text
+
+      <View
         style={{
-          color: colors.red,
-        }}>
-        {sentence}
-      </Text>
-    </View>
+          borderBottomColor: colors.green,
+          borderBottomWidth: 2,
+          paddingTop: spacing.base,
+        }}
+      />
+    </SafeAreaView>
   );
 };
 

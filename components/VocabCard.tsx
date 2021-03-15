@@ -10,6 +10,7 @@ const VocabCard = ({
   sentenceFrench,
   sentenceEnglish,
 }: any) => {
+  const isWordFeminine = wordFrench.split(' ').includes('La', 'Une');
   return (
     <SafeAreaView style={styles.container}>
       <Heart />
@@ -21,7 +22,13 @@ const VocabCard = ({
             alignItems: 'center',
             paddingRight: spacing.baseSmall,
           }}>
-          <Text style={styles.wordFrench}>{wordFrench}</Text>
+          <Text
+            style={[
+              styles.wordFrench,
+              {color: isWordFeminine ? colors.red : colors.blue},
+            ]}>
+            {wordFrench}
+          </Text>
           <Text style={styles.wordEnglish}>{wordEnglish}</Text>
         </View>
 
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
   },
   wordFrench: {
     fontWeight: 'bold',
-    color: colors.red,
+    color: colors.blue,
     fontSize: 20,
   },
   sentenceEnglish: {
