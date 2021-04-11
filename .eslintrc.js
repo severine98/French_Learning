@@ -5,4 +5,5 @@ module.exports = {
   rules: {
     'no-inline-styles/no-inline-styles': 1,
   },
+  // eslint-disable-line react-native/no-inline-styles
 };

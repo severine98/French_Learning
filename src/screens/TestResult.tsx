@@ -7,7 +7,7 @@ import {colors, spacing} from '../styles';
 // import firestore from '@react-native-firebase/firestore';
 
 export const TestResult = ({navigation, route}) => {
-  const {score, scoreArray} = route?.params;
+  const {score} = route?.params;
   const [test, setTest] = useState();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const TestResult = ({navigation, route}) => {
     navigation.goBack();
   };
   const handleCorrection = () => {
-    navigation.navigate('TestCorrection', {scoreArray, content: test});
+    navigation.navigate('TestCorrection', {content: test});
   };
   const handleBackToVocab = () => {
     navigation.navigate('Christmas');
