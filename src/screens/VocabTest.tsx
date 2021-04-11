@@ -1,20 +1,40 @@
 import React, {useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Button, SafeAreaView, StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {NavBar, TestCard} from '../../components';
+
+export const totalArray: any = [];
+export const answersArray: any = [];
 
 export const VocabTest = ({navigation, route}) => {
   const content = route?.params;
   const [disabled, setDisabled] = useState(false);
-  const totalArray: any = [];
 
   const handleChange = (value: string, word: string) => {
     let singleScore = 0;
+    let found = false;
+
     if (value === word) {
       singleScore = 1;
     } else {
       singleScore = 0;
     }
+
+    if (answersArray.length < 1) {
+      answersArray.push({[word]: value});
+    }
+
+    answersArray.forEach((item) => {
+      if (Object.keys(item).toString() === word) {
+        item[word] = value;
+        found = true;
+      }
+    });
+
+    if (!found) {
+      answersArray.push({[word]: value});
+    }
+
     totalArray.forEach((item) => {
       Object.keys(item).forEach((key) => {
         if (key === word) {
@@ -67,11 +87,3 @@ export const VocabTest = ({navigation, route}) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
