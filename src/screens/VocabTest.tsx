@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button, SafeAreaView, StyleSheet} from 'react-native';
+import React from 'react';
+import {Button, SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {NavBar, TestCard} from '../../components';
 
@@ -8,7 +8,6 @@ export const answersArray: any = [];
 
 export const VocabTest = ({navigation, route}) => {
   const content = route?.params;
-  const [disabled, setDisabled] = useState(false);
 
   const handleChange = (value: string, word: string) => {
     let singleScore = 0;
@@ -77,11 +76,7 @@ export const VocabTest = ({navigation, route}) => {
               </>
             );
           })}
-          <Button
-            title={'Submit answers'}
-            onPress={handleSubmit}
-            disabled={disabled}
-          />
+          <Button title={'Submit answers'} onPress={handleSubmit} />
         </ScrollView>
       </SafeAreaView>
     </>

@@ -30,8 +30,6 @@ const CorrectionCard = ({word, sentence, point}: TestCardProp) => {
     }
   });
 
-  console.log('userAnswer', userAnswer);
-
   useEffect(() => {
     firebase
       .database()

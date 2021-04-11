@@ -1,3 +1,6 @@
+/* eslint-disable no-inline-styles/no-inline-styles */
+/* eslint-disable react-native/no-inline-styles */
+
 import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import firebase from 'react-native-firebase';
