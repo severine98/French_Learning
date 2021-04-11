@@ -7,7 +7,7 @@ import {colors, spacing} from '../styles';
 // import firestore from '@react-native-firebase/firestore';
 
 export const TestResult = ({navigation, route}) => {
-  const {score} = route?.params;
+  const {score, category} = route?.params;
   const [test, setTest] = useState();
 
   useEffect(() => {
@@ -16,15 +16,15 @@ export const TestResult = ({navigation, route}) => {
       .ref('test')
       .once('value')
       .then((snapshot) => {
-        setTest(snapshot.val().christmas);
+        setTest(snapshot.val()[category]);
       });
-  }, []);
+  }, [category]);
 
   const handleTryAgain = () => {
     navigation.goBack();
   };
   const handleCorrection = () => {
-    navigation.navigate('TestCorrection', {content: test});
+    navigation.navigate('TestCorrection', {content: test, category});
   };
   const handleBackToVocab = () => {
     navigation.navigate('Christmas');
