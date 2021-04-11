@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {NavBar, TestCard} from '../../components';
+import {CorrectionCard, NavBar} from '../../components';
 
-export const VocabTest = ({navigation, route}) => {
+export const TestCorrection = ({navigation, route}) => {
   const content = route?.params;
-  const [disabled, setDisabled] = useState(false);
   const totalArray: any = [];
 
   const handleChange = (value: string, word: string) => {
@@ -49,7 +48,7 @@ export const VocabTest = ({navigation, route}) => {
             totalArray.push({[word[0].replace('_', ' ')]: null});
             return (
               <>
-                <TestCard
+                <CorrectionCard
                   word={word[0].replace('_', ' ')}
                   sentence={word[1]}
                   handleChange={handleChange}
@@ -57,21 +56,8 @@ export const VocabTest = ({navigation, route}) => {
               </>
             );
           })}
-          <Button
-            title={'Submit answers'}
-            onPress={handleSubmit}
-            disabled={disabled}
-          />
         </ScrollView>
       </SafeAreaView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
