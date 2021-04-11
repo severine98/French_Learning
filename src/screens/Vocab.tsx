@@ -6,8 +6,8 @@ import {colors, spacing} from '../styles';
 // import firestore from '@react-native-firebase/firestore';
 
 export const Vocab = ({navigation}) => {
-  const handleXmas = () => {
-    navigation.navigate('Christmas');
+  const handleVocab = (category: string) => {
+    navigation.navigate('Christmas', {category});
   };
 
   return (
@@ -17,13 +17,16 @@ export const Vocab = ({navigation}) => {
         <Text style={styles.title}>Vocab screen</Text>
       </View>
       <View>
-        <MenuTitle title={'Christmas'} onPress={handleXmas} />
-        <MenuTitle title={'Holidays'} onPress={handleXmas} />
-        <MenuTitle title={'Cooking'} onPress={handleXmas} />
-        <MenuTitle title={'Familly'} onPress={handleXmas} />
-        <MenuTitle title={'Birthdays'} onPress={handleXmas} />
-        <MenuTitle title={'Sports'} onPress={handleXmas} />
-        <MenuTitle title={'Colors'} onPress={handleXmas} />
+        <MenuTitle
+          title={'Christmas'}
+          onPress={() => handleVocab('christmas')}
+        />
+        <MenuTitle title={'Holidays'} onPress={handleVocab} />
+        <MenuTitle title={'Cooking'} onPress={handleVocab} />
+        <MenuTitle title={'Familly'} onPress={handleVocab} />
+        <MenuTitle title={'Birthdays'} onPress={handleVocab} />
+        <MenuTitle title={'Sports'} onPress={handleVocab} />
+        <MenuTitle title={'Colors'} onPress={() => handleVocab('colors')} />
       </View>
     </ScrollView>
   );

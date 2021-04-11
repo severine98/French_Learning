@@ -1,3 +1,6 @@
+/* eslint-disable no-inline-styles/no-inline-styles */
+/* eslint-disable react-native/no-inline-styles */
+
 import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import firebase from 'react-native-firebase';
@@ -9,9 +12,10 @@ type TestCardProp = {
   word: string;
   sentence: any;
   handleChange: any;
+  category: string;
 };
 
-const TestCard = ({word, sentence, handleChange}: TestCardProp) => {
+const TestCard = ({word, sentence, handleChange, category}: TestCardProp) => {
   const indexOfWordInSentence = sentence.indexOf(word);
   const wordLength = word.length;
   const stringArray = sentence.split('');
@@ -25,9 +29,9 @@ const TestCard = ({word, sentence, handleChange}: TestCardProp) => {
       .ref('test')
       .once('value')
       .then((snapshot) => {
-        setVocabList(snapshot.val().christmas);
+        setVocabList(snapshot.val()[category]);
       });
-  }, []);
+  }, [category]);
 
   const shuffleArray = (array) => {
     // The de-facto unbiased shuffle algorithm is the Fisher-Yates (aka Knuth) Shuffle.

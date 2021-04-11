@@ -27,28 +27,3 @@ import firebase from 'react-native-firebase';
 
 // const rootRef = firebase.database().ref();
 // const nameRef = rootRef.child('name');
-
-const FirebaseConfig = () => {
-  const [frenchWord, setFrenchWord] = useState();
-  const [test, setTest] = useState();
-
-  useEffect(() => {
-    firebase
-      .database()
-      .ref('vocab')
-      .once('value')
-      .then((snapshot) => {
-        setFrenchWord(snapshot.val().christmas);
-      });
-  }, []);
-
-  useEffect(() => {
-    firebase
-      .database()
-      .ref('test')
-      .once('value')
-      .then((snapshot) => {
-        setTest(snapshot.val().christmas);
-      });
-  }, []);
-};

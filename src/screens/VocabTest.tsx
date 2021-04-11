@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button, SafeAreaView, StyleSheet} from 'react-native';
+import React from 'react';
+import {Button, SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {NavBar, TestCard} from '../../components';
 
@@ -7,8 +7,7 @@ export const totalArray: any = [];
 export const answersArray: any = [];
 
 export const VocabTest = ({navigation, route}) => {
-  const content = route?.params;
-  const [disabled, setDisabled] = useState(false);
+  const {content, category} = route.params ?? {};
 
   const handleChange = (value: string, word: string) => {
     let singleScore = 0;
@@ -57,6 +56,7 @@ export const VocabTest = ({navigation, route}) => {
     navigation.navigate('TestResult', {
       score: totalScore,
       scoreArray,
+      category,
     });
   };
 
@@ -65,7 +65,7 @@ export const VocabTest = ({navigation, route}) => {
       <SafeAreaView style={{flex: 1}}>
         <NavBar />
         <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-          {Object.entries(content.content).map((word) => {
+          {Object.entries(content).map((word) => {
             totalArray.push({[word[0].replace('_', ' ')]: null});
             return (
               <>
@@ -73,15 +73,12 @@ export const VocabTest = ({navigation, route}) => {
                   word={word[0].replace('_', ' ')}
                   sentence={word[1]}
                   handleChange={handleChange}
+                  category={category}
                 />
               </>
             );
           })}
-          <Button
-            title={'Submit answers'}
-            onPress={handleSubmit}
-            disabled={disabled}
-          />
+          <Button title={'Submit answers'} onPress={handleSubmit} />
         </ScrollView>
       </SafeAreaView>
     </>

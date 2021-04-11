@@ -6,9 +6,12 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {NavBar, VocabCard} from '../../components';
 import {colors, spacing} from '../styles';
 
-export const Christmas = ({navigation}) => {
+export const Christmas = ({navigation, route}) => {
+  const {category} = route?.params;
   const [frenchWord, setFrenchWord] = useState();
   const [test, setTest] = useState();
+
+  console.log('category', typeof category, category);
 
   useEffect(() => {
     firebase
@@ -16,9 +19,9 @@ export const Christmas = ({navigation}) => {
       .ref('vocab')
       .once('value')
       .then((snapshot) => {
-        setFrenchWord(snapshot.val().christmas);
+        setFrenchWord(snapshot.val()[category]);
       });
-  }, []);
+  }, [category]);
 
   useEffect(() => {
     firebase
@@ -26,12 +29,12 @@ export const Christmas = ({navigation}) => {
       .ref('test')
       .once('value')
       .then((snapshot) => {
-        setTest(snapshot.val().christmas);
+        setTest(snapshot.val()[category]);
       });
-  }, []);
+  }, [category]);
 
   const handleTest = () => {
-    navigation.navigate('VocabTest', {content: test});
+    navigation.navigate('VocabTest', {content: test, category});
   };
 
   return (
@@ -39,7 +42,7 @@ export const Christmas = ({navigation}) => {
       <NavBar />
       <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Christmas vocab</Text>
+          <Text style={styles.title}>{category.toUpperCase()} vocab</Text>
           {Object.entries(frenchWord ?? {}).map((word) => {
             return (
               <VocabCard

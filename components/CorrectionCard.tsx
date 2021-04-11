@@ -12,9 +12,10 @@ type TestCardProp = {
   word: string;
   sentence: any;
   point: boolean;
+  category: string;
 };
 
-const CorrectionCard = ({word, sentence, point}: TestCardProp) => {
+const CorrectionCard = ({word, sentence, point, category}: TestCardProp) => {
   const indexOfWordInSentence = sentence.indexOf(word);
   const wordLength = word.length;
   const stringArray = sentence.split('');
@@ -30,17 +31,15 @@ const CorrectionCard = ({word, sentence, point}: TestCardProp) => {
     }
   });
 
-  console.log('userAnswer', userAnswer);
-
   useEffect(() => {
     firebase
       .database()
       .ref('test')
       .once('value')
       .then((snapshot) => {
-        setVocabList(snapshot.val().christmas);
+        setVocabList(snapshot.val()[category]);
       });
-  }, []);
+  }, [category]);
 
   const shuffleArray = (array) => {
     // The de-facto unbiased shuffle algorithm is the Fisher-Yates (aka Knuth) Shuffle.
