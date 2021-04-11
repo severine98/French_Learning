@@ -15,6 +15,7 @@ import {
   Christmas,
   GeneralMenu,
   Home,
+  TestCorrection,
   TestResult,
   Vocab,
   VocabTest,
@@ -38,6 +39,7 @@ export default function App() {
         <Stack.Screen name="Christmas" component={Christmas} />
         <Stack.Screen name="VocabTest" component={VocabTest} />
         <Stack.Screen name="TestResult" component={TestResult} />
+        <Stack.Screen name="TestCorrection" component={TestCorrection} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -2,6 +2,9 @@
 // import database from '@react-native-firebase/database';
 // import {Platform} from 'react-native';
 
+import {useState, useEffect} from 'react';
+import firebase from 'react-native-firebase';
+
 // const iosConfig = {
 //   clientId:
 //     '1032945606148-rnlnkcnh88r5cv09lv5qauvsjblla0mb.apps.googleusercontent.com',
@@ -24,3 +27,28 @@
 
 // const rootRef = firebase.database().ref();
 // const nameRef = rootRef.child('name');
+
+const FirebaseConfig = () => {
+  const [frenchWord, setFrenchWord] = useState();
+  const [test, setTest] = useState();
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref('vocab')
+      .once('value')
+      .then((snapshot) => {
+        setFrenchWord(snapshot.val().christmas);
+      });
+  }, []);
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref('test')
+      .once('value')
+      .then((snapshot) => {
+        setTest(snapshot.val().christmas);
+      });
+  }, []);
+};
