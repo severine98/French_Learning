@@ -7,7 +7,7 @@ import {Heart} from '../assets/icons';
 import {colors, spacing} from '../src/styles';
 import firebase from 'react-native-firebase';
 
-const VocabCard = ({
+const DicCard = ({
   wordFrench,
   wordEnglish,
   sentenceFrench,
@@ -15,7 +15,7 @@ const VocabCard = ({
   addedToDictionary,
 }: any) => {
   const isWordFeminine = wordFrench.split(' ').includes('La', 'Une');
-  const [addedToDic, setAddedToDic] = useState();
+  const [addedToDic, setAddedToDic] = useState(false);
   console.log('addedToDictionary', addedToDictionary);
 
   const rawWord = 'Père_Noël';
@@ -55,7 +55,7 @@ const VocabCard = ({
             {sentenceFrench}
           </Text>
           <TouchableOpacity onPress={handleToggleFav}>
-            <Text style={{color: addedToDic ? colors.black : colors.red}}>
+            <Text style={{color: addedToDic ? colors.red : colors.black}}>
               heart
             </Text>
           </TouchableOpacity>
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {VocabCard};
+export {DicCard};

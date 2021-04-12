@@ -11,8 +11,6 @@ export const Christmas = ({navigation, route}) => {
   const [frenchWord, setFrenchWord] = useState();
   const [test, setTest] = useState();
 
-  console.log('category', typeof category, category);
-
   useEffect(() => {
     firebase
       .database()
@@ -50,6 +48,7 @@ export const Christmas = ({navigation, route}) => {
                 sentenceFrench={word[1].sentenceFrench}
                 wordFrench={word[1].wordFrench.replace('_', ' ')}
                 wordEnglish={word[1].wordEnglish.replace('_', ' ')}
+                addedToDictionary={word[1].fav}
               />
             );
           })}

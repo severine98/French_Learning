@@ -5,3 +5,4 @@ export {Christmas} from './Christmas';
 export {VocabTest} from './VocabTest';
 export {TestResult} from './TestResult';
 export {TestCorrection} from './TestCorrection';
+export {Dictionary} from './Dictionary';

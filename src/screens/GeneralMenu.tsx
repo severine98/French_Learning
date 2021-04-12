@@ -8,6 +8,11 @@ export const GeneralMenu = ({navigation}) => {
   const handleVocab = () => {
     navigation.navigate('Vocab');
   };
+
+  const handleDictionary = () => {
+    navigation.navigate('Dictionary');
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <NavBar />
@@ -15,7 +20,7 @@ export const GeneralMenu = ({navigation}) => {
         <MenuTitle title={'VOCAB'} onPress={handleVocab} />
         <MenuTitle title={'VERBS'} onPress={handleVocab} />
         <MenuTitle title={'CONJUGATION'} onPress={handleVocab} />
-        <MenuTitle title={'DICTIONARY'} onPress={handleVocab} />
+        <MenuTitle title={'DICTIONARY'} onPress={handleDictionary} />
         <MenuTitle title={'PROGRESS'} onPress={handleVocab} />
       </View>
     </SafeAreaView>
