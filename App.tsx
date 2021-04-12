@@ -13,6 +13,7 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import {
   Christmas,
+  Dictionary,
   GeneralMenu,
   Home,
   TestCorrection,
@@ -36,6 +37,7 @@ export default function App() {
         />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Vocab" component={Vocab} />
+        <Stack.Screen name="Dictionary" component={Dictionary} />
         <Stack.Screen name="Christmas" component={Christmas} />
         <Stack.Screen name="VocabTest" component={VocabTest} />
         <Stack.Screen name="TestResult" component={TestResult} />
